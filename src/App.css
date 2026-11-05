@@ -1,0 +1,158 @@
+/*
+  App.css - ONLY for the complex animations that are awkward in pure Tailwind:
+  1. Typewriter cursor blink
+  2. Button ripple effect (the .ripple span is created by JS on click)
+  3. Scroll reveal (fade-in-up when elements enter the viewport)
+*/
+
+/* Typewriter cursor */
+.cursor {
+  animation: blink 1s infinite;
+  color: #0cdfe6;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Button ripple effect (same as original script.js) */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/*
+  Scroll reveal - elements start invisible and slide up when they enter
+  the viewport. App.jsx attaches an IntersectionObserver that adds .in-view.
+*/
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Focus styles for accessibility (same as original injected CSS) */
+.nav-link:focus-visible,
+.social-icon:focus-visible,
+.hire-btn:focus-visible,
+.cta-btn:focus-visible {
+  outline: 2px solid #00d4ff;
+  outline-offset: 2px;
+}
+
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1s;
+}
+
+.stat {
+    text-align: center;
+    padding: 1.9rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    transition: 0s;
+    background-color:#18191a;
+    box-shadow: 0 4px 6px rgba(12, 153, 241, 0.1);
+    
+     
+}
+
+.stat:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card);
+    border-color: var(--accent-primary);
+  
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent-primary);
+    margin-bottom: 0.5rem;
+
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+
+.highlight {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
+    transition: 0s;
+}
+
+.highlight:hover {
+    transform: translateX(10px);
+      border-color: var(--accent-primary);
+      background-color: #141515;
+      background-position: 0% 0%;
+}
+.highlight i {
+    color: var(--accent-primary);
+    font-size: 1.5rem;
+    width: 30px;
+    text-align: center;
+
+}
+
+.highlight h4 {
+    margin-bottom: 0.3rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.highlight p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+

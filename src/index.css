@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Base styles taken from the original style.css.
+  Everything else is done with Tailwind utility classes in the components.
+*/
+
+@layer base {
+  body {
+    @apply bg-bg-primary text-text-primary font-inter leading-[1.7] overflow-x-hidden antialiased;
+  }
+
+  /* Custom scrollbar - same as original */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #111111;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #00bfea 0%, #0088bb 100%);
+  }
+}
+
+@layer components {
+  /* Reusable glassmorphism card (original --glass-bg / --glass-border) */
+  .glass {
+    @apply bg-white/5 border border-white/10 backdrop-blur-md;
+  }
+
+  /* Gradient section title with the underline bar (original .section-title) */
+  .section-title {
+    @apply text-[clamp(2.5rem,5vw,4rem)] font-black text-center mb-12 bg-accent-gradient bg-clip-text text-transparent tracking-tight relative;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(135deg, #ff8800 0%, #0099cc 100%);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+}
