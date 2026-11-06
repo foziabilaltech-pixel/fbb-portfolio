@@ -8,8 +8,10 @@ export default function Admin() {
   // Forms ki State
   const [newProject, setNewProject] = useState({ title: '', description: '', image: '', tech: '', liveLink: '', githubLink: '' });
   const [newBlog, setNewBlog] = useState({ title: '', category: '', excerpt: '', content: '', image: '' });
-  const [profileData, setProfileData] = useState({ image: '', description: '', projectsCount: '', experience: '', responsiveDesign: '' });
-
+  
+  // Profile State (Yahan aboutMe add kar diya hai)
+  const [profileData, setProfileData] = useState({ image: '', aboutMe: '', description: '', projectsCount: '', experience: '', responsiveDesign: '' });
+ 
   // Data Fetch
   const fetchData = () => {
     fetch('http://localhost:5000/api/contact').then(res => res.json()).then(data => setMessages(data)).catch(err => console.error(err));
@@ -86,13 +88,20 @@ export default function Admin() {
         <h2 className="text-4xl font-bold text-text-primary mb-10 text-center">
           Admin <span className="text-accent-primary">Dashboard</span>
         </h2>
-
-        {/* --- 1. EDIT PROFILE (HERO SECTION) FORM --- */}
+        
+        {/* --- 1. EDIT PROFILE (HERO & ABOUT SECTION) FORM --- */}
         <div className="glass p-6 rounded-2xl mb-8 border border-white/10">
-          <h3 className="text-xl font-bold text-white mb-4">Edit Profile (Hero Section)</h3>
+          <h3 className="text-xl font-bold text-white mb-4">Edit Profile (Hero & About)</h3>
           <form onSubmit={handleUpdateProfile} className="flex flex-col gap-3">
-            <input type="text" placeholder="Profile Image URL" className="p-3 bg-white/5 text-white rounded-lg" value={profileData.image || ''} onChange={(e) => setProfileData({...profileData, image: e.target.value})} />
-            <textarea placeholder="Hero Description" rows="2" className="p-3 bg-white/5 text-white rounded-lg" value={profileData.description || ''} onChange={(e) => setProfileData({...profileData, description: e.target.value})}></textarea>
+            
+            {/* Hero Image */}
+            <input type="text" placeholder="Hero Image URL (Home Page)" className="p-3 bg-white/5 text-white rounded-lg" value={profileData.image || ''} onChange={(e) => setProfileData({...profileData, image: e.target.value})} />
+            
+            {/* About Image - YEH NAYI LINE SAHI JAGAH PAR HAI */}
+            <input type="text" placeholder="About Section Image URL" className="p-3 bg-white/5 text-white rounded-lg" value={profileData.aboutMe || ''} onChange={(e) => setProfileData({...profileData, aboutMe: e.target.value})} />
+            
+            <textarea placeholder="Hero Description (Home Page Text)" rows="2" className="p-3 bg-white/5 text-white rounded-lg" value={profileData.description || ''} onChange={(e) => setProfileData({...profileData, description: e.target.value})}></textarea>
+            
             <div className="grid grid-cols-3 gap-2">
               <input type="text" placeholder="Projects (5+)" className="p-3 bg-white/5 text-white rounded-lg" value={profileData.projectsCount || ''} onChange={(e) => setProfileData({...profileData, projectsCount: e.target.value})} />
               <input type="text" placeholder="Exp (1+)" className="p-3 bg-white/5 text-white rounded-lg" value={profileData.experience || ''} onChange={(e) => setProfileData({...profileData, experience: e.target.value})} />

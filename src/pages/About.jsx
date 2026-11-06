@@ -1,7 +1,16 @@
-
-import profile from '../assets/images/profile.jpg';
+import { useState, useEffect } from 'react';
 
 export default function About({ onNotify }) {
+  // Backend se picture fetch karne ke liye state
+  const [profileData, setProfileData] = useState({ aboutMe: '' });
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/profile')
+      .then((res) => res.json())
+      .then((data) => setProfileData(data))
+      .catch((err) => console.error("Error fetching profile:", err));
+  }, []);
+
   return (
     <section
       id="about"
@@ -11,14 +20,15 @@ export default function About({ onNotify }) {
       <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,212,255,0.02)_0%,transparent_50%)] pointer-events-none"></div>
 
       <div className="w-full max-w-[1400px] mx-auto px-3 sm:px-4 md:px-6 xl:px-8">
-        {/* GAP KAM KAR DIYA HAI YAHAN: gap-12 md:gap-16 ki jagah ab gap-6 md:gap-10 hai */}
+        
         <div className="grid grid-cols-1 md:grid-cols-[0.8fr_1.2fr] items-center gap-6 md:gap-10 max-w-[1300px] mx-auto relative z-10 text-center md:text-left">
           
           {/* ------ Left: image with experience badge ------ */}
           <div className="relative">
             <div className="relative inline-block">
               <img
-                src={profile}
+                /* Yahan humne backend wali picture lagadi hai, agar woh khali ho toh purani profile.jpg lag jayegi */
+                src={profileData.aboutMe || profileData.image || '/src/assets/images/profile.jpg'}
                 alt="About Fouzia Bilal"
                 className="w-[220px] sm:w-[250px] md:w-[300px] xl:w-full xl:max-w-[500px] h-[300px] sm:h-[350px] md:h-[400px] xl:h-[600px] object-cover rounded-[20px] border-[3px] border-white/10 shadow-card transition-all duration-500 hover:scale-[1.02] hover:shadow-hover"
               />
@@ -34,7 +44,6 @@ export default function About({ onNotify }) {
           </div>
 
           {/* ------ Right: text content ------ */}
-          {/* GAP KAM KAR DIYA HAI YAHAN: gap-8 ki jagah ab gap-4 hai taake content upar aaye */}
           <div className="flex flex-col gap-4">
             <h2 className="section-title">About Me</h2>
 
@@ -48,38 +57,37 @@ export default function About({ onNotify }) {
               </p>
             </div>
 
-            {/* manual Education/Location wale cards hain ( code ke mutabiq) */}
-           {/* Alag Alag Boxes ke liye Container */}
-<div className="flex flex-col gap-3 my-4"> 
-    
-    {/* Card 1: Education */}
-    <div className="flex items-center gap-4 p-8 rounded-xl bg-white/5 border border-white/10 shadow-sm hover:border-accent-primary transition-all">
-        <i className="fas fa-graduation-cap text-accent-primary text-xl w-6 text-center"></i>
-        <div>
-            <h4 className="font-bold text-white text-sm mb-2">Education</h4>
-            <p className="text-gray-400 text-xs">Computer Science</p>
-        </div>
-    </div>
+            {/* Alag Alag Boxes ke liye Container (Aapka Original Design) */}
+            <div className="flex flex-col gap-3 my-4"> 
+                
+                {/* Card 1: Education */}
+                <div className="flex items-center gap-4 p-8 rounded-xl bg-white/5 border border-white/10 shadow-sm hover:border-accent-primary transition-all text-left">
+                    <i className="fas fa-graduation-cap text-accent-primary text-xl w-6 text-center"></i>
+                    <div>
+                        <h4 className="font-bold text-white text-sm mb-2">Education</h4>
+                        <p className="text-gray-400 text-xs">Computer Science</p>
+                    </div>
+                </div>
 
-    {/* Card 2: Location */}
-    <div className="flex items-center gap-4 p-8 rounded-xl bg-white/5 border border-white/10 shadow-sm hover:border-accent-primary transition-all">
-        <i className="fas fa-map-marker-alt text-accent-primary text-xl w-6 text-center"></i>
-        <div>
-            <h4 className="font-bold text-white text-sm mb-2">Location</h4>
-            <p className="text-gray-400 text-xs">Pakistan, Lahore</p>
-        </div>
-    </div>
+                {/* Card 2: Location */}
+                <div className="flex items-center gap-4 p-8 rounded-xl bg-white/5 border border-white/10 shadow-sm hover:border-accent-primary transition-all text-left">
+                    <i className="fas fa-map-marker-alt text-accent-primary text-xl w-6 text-center"></i>
+                    <div>
+                        <h4 className="font-bold text-white text-sm mb-2">Location</h4>
+                        <p className="text-gray-400 text-xs">Pakistan, Lahore</p>
+                    </div>
+                </div>
 
-    {/* Card 3: Experience */}
-    <div className="flex items-center gap-4 p-8 rounded-xl bg-white/5 border border-white/10 shadow-sm hover:border-accent-primary transition-all">
-        <i className="fas fa-briefcase text-accent-primary text-xl w-6 text-center"></i>
-        <div>
-            <h4 className="font-bold text-white text-sm mb-2">Experience</h4>
-            <p className="text-gray-400 text-xs">2+ Years in Web Development</p>
-        </div>
-    </div>
+                {/* Card 3: Experience */}
+                <div className="flex items-center gap-4 p-8 rounded-xl bg-white/5 border border-white/10 shadow-sm hover:border-accent-primary transition-all text-left">
+                    <i className="fas fa-briefcase text-accent-primary text-xl w-6 text-center"></i>
+                    <div>
+                        <h4 className="font-bold text-white text-sm mb-2">Experience</h4>
+                        <p className="text-gray-400 text-xs">2+ Years in Web Development</p>
+                    </div>
+                </div>
 
-</div>
+            </div>
 
             {/* Download CV Button */}
             <div className="flex gap-4 justify-center md:justify-start md:gap-6 my-2">
