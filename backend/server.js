@@ -13,10 +13,10 @@ const app = express();
 app.use(cors()); 
 app.use(express.json()); // Yeh zaroori hai JSON data read karne ke liye
 
-app.use('/api/contact', contactRoutes); // Contact routes ko use karne ke liye
-app.use('/api/projects', projectRoutes); 
-app.use('/api/blogs', require('./routes/blogRoutes')); // Blog routes ko use karne ke liye
-app.use('/api/profile', require('./routes/profileRoutes')); // Profile routes ko use karne ke liye
+app.use('https://fbb-portfolio-6tey.vercel.app/api/contact', contactRoutes); // Contact routes ko use karne ke liye
+app.use('https://fbb-portfolio-6tey.vercel.app/api/projects', projectRoutes); 
+app.use('https://fbb-portfolio-6tey.vercel.app/api/blogs', require('./routes/blogRoutes')); // Blog routes ko use karne ke liye
+app.use('https://fbb-portfolio-6tey.vercel.app/api/profile', require('./routes/profileRoutes')); // Profile routes ko use karne ke liye
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
