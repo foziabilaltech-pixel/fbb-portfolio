@@ -32,8 +32,12 @@ app.use('/api/profile', require('./routes/profileRoutes')); // Yahan humne profi
 app.get('/', (req, res) => {
   res.send('Backend is running perfectly!');
 });
+ 
+//Vercel ke liye server ko export karna
+if(process.env.NODE_ENV === 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`🚀 Server is running in production mode on port ${PORT}`));
+}
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
-});
+// Vercel ke liye server ko export karna
+ module.exports = app;  
