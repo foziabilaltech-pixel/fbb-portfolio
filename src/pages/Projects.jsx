@@ -6,7 +6,7 @@ export default function Projects() {
 
   // Backend se projects fetch karna
   useEffect(() => {
-    fetch('http://localhost:5000/api/projects')
+    fetch('/api/')
       .then(res => res.json())
       .then(data => {
         setProjects(data);

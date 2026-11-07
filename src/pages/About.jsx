@@ -5,7 +5,7 @@ export default function About({ onNotify }) {
   const [profileData, setProfileData] = useState({ aboutMe: '' });
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/profile')
+    fetch('/api/profile')
       .then((res) => res.json())
       .then((data) => setProfileData(data))
       .catch((err) => console.error("Error fetching profile:", err));

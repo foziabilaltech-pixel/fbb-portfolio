@@ -7,7 +7,7 @@ export default function Blog() {
 
   // 1. Backend se data fetch karna
   useEffect(() => {
-    fetch('http://localhost:5000/api/blogs')
+    fetch('/api/blogs')
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);
