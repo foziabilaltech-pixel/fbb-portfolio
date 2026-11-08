@@ -9,12 +9,14 @@ const projectRoutes = require('./routes/projectRoutes');
 
 const app = express();
 
-// Middleware
-app.use(cors()); 
-app.use(express.json()); // Yeh zaroori hai JSON data read karne ke liye
+app.use(cors({
+  origin: 'https://fbb-portfolio-6ti7z3q7e-fouzia-bilal.vercel.app', // Aapki frontend ka link
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+})); // Yeh zaroori hai JSON data read karne ke liye
 
-app.use('https://fbb-portfolio-6tey.vercel.app/api/contact', contactRoutes); // Contact routes ko use karne ke liye
-app.use('https://fbb-portfolio-6tey.vercel.app/api/projects', projectRoutes); 
+app.use('/api/contact', contactRoutes); // Contact routes ko use karne ke liye
+app.use('/api/projects', projectRoutes); 
 app.use('https://fbb-portfolio-6tey.vercel.app/api/blogs', require('./routes/blogRoutes')); // Blog routes ko use karne ke liye
 app.use('https://fbb-portfolio-6tey.vercel.app/api/profile', require('./routes/profileRoutes')); // Profile routes ko use karne ke liye
 
