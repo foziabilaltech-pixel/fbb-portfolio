@@ -8,7 +8,7 @@ export default function Hero() {
 
   // Backend se profile data fetch karna
   useEffect(() => {
-    fetch('/api/profile')
+    fetch('https://fbb-portfolio-mxw6.vercel.app/api/profile')
       .then(res => res.json())
       .then(data => setProfile(data))
       .catch(err => console.error(err));
