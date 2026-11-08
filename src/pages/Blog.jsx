@@ -7,7 +7,7 @@ export default function Blog() {
 
   // 1. Backend se data fetch karna
   useEffect(() => {
-    fetch('https://fbb-portfolio-6tey.vercel.app/api/blogs')
+    fetch('/api/blogs')
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);

@@ -14,10 +14,10 @@ export default function Admin() {
  
   // Data Fetch
   const fetchData = () => {
-    fetch('https://fbb-portfolio-6tey.vercel.app/api/contact').then(res => res.json()).then(data => setMessages(data)).catch(err => console.error(err));
-    fetch('https://fbb-portfolio-6tey.vercel.app/api/projects').then(res => res.json()).then(data => setProjects(data)).catch(err => console.error(err));
-    fetch('https://fbb-portfolio-6tey.vercel.app/api/blogs').then(res => res.json()).then(data => setBlogs(data)).catch(err => console.error(err));
-    fetch('https://fbb-portfolio-6tey.vercel.app/api/profile').then(res => res.json()).then(data => setProfileData(data)).catch(err => console.error(err));
+    fetch('/api/contact').then(res => res.json()).then(data => setMessages(data)).catch(err => console.error(err));
+    fetch('/api/projects').then(res => res.json()).then(data => setProjects(data)).catch(err => console.error(err));
+    fetch('/api/blogs').then(res => res.json()).then(data => setBlogs(data)).catch(err => console.error(err));
+    fetch('/api/profile').then(res => res.json()).then(data => setProfileData(data)).catch(err => console.error(err));
   };
 
   useEffect(() => { fetchData(); }, []);
@@ -26,7 +26,7 @@ export default function Admin() {
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://fbb-portfolio-6tey.vercel.app/api/profile', {
+      const res = await fetch('/api/profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(profileData),
@@ -40,7 +40,7 @@ export default function Admin() {
     e.preventDefault();
     try {
       const projectData = { ...newProject, tech: newProject.tech.split(',') };
-      const res = await fetch('https://fbb-portfolio-6tey.vercel.app/api/projects', {
+      const res = await fetch('/api/projects', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(projectData),
       });
       if (res.ok) {
@@ -53,14 +53,14 @@ export default function Admin() {
 
   const handleDeleteProject = async (id) => {
     if (!window.confirm("Project delete karna hai?")) return;
-    try { await fetch(`https://fbb-portfolio-6tey.vercel.app/api/projects/${id}`, { method: 'DELETE' }); fetchData(); } catch (error) { console.error(error); }
+    try { await fetch(`/api/projects/${id}`, { method: 'DELETE' }); fetchData(); } catch (error) { console.error(error); }
   };
 
   // --- BLOG FUNCTIONS ---
   const handleAddBlog = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://fbb-portfolio-6tey.vercel.app/api/blogs', {
+      const res = await fetch('/api/blogs', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newBlog),
       });
       if (res.ok) {
@@ -73,13 +73,13 @@ export default function Admin() {
 
   const handleDeleteBlog = async (id) => {
     if (!window.confirm("Blog delete karna hai?")) return;
-    try { await fetch(`https://fbb-portfolio-6tey.vercel.app/api/blogs/${id}`, { method: 'DELETE' }); fetchData(); } catch (error) { console.error(error); }
+    try { await fetch(`/api/blogs/${id}`, { method: 'DELETE' }); fetchData(); } catch (error) { console.error(error); }
   };
 
   // --- MESSAGE FUNCTIONS ---
   const handleDeleteMessage = async (id) => {
     if (!window.confirm("Message delete karna hai?")) return;
-    try { await fetch(`https://fbb-portfolio-6tey.vercel.app/api/contact/${id}`, { method: 'DELETE' }); fetchData(); } catch (error) { console.error(error); }
+    try { await fetch(`/api/contact/${id}`, { method: 'DELETE' }); fetchData(); } catch (error) { console.error(error); }
   };
 
   return (

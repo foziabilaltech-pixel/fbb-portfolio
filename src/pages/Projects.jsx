@@ -6,7 +6,7 @@ export default function Projects() {
 
   // Backend se projects fetch karna
   useEffect(() => {
-    fetch('https://fbb-portfolio-6tey.vercel.app/api/projects')
+    fetch('/api/projects')
       .then(res => res.json())
       .then(data => {
         setProjects(data);

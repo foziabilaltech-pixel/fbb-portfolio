@@ -5,7 +5,7 @@ export default function About({ onNotify }) {
   const [profileData, setProfileData] = useState({ aboutMe: '' });
 
   useEffect(() => {
-    fetch('https://fbb-portfolio-6tey.vercel.app/api/profile')
+    fetch('/api/profile')
       .then((res) => res.json())
       .then((data) => setProfileData(data))
       .catch((err) => console.error("Error fetching profile:", err));

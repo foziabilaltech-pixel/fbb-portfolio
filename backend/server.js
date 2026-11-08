@@ -7,11 +7,17 @@ const app = express();
 
 // 1. CORS Setup (Yeh bilkul sahi hai)
 app.use(cors({
-  origin: 'https://fbb-portfolio-6ti7z3q7e-fouzia-bilal.vercel.app', // Aapki frontend ka link
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+    origin: function (origin, callback) {
+        // Agar origin nahi hai (jaise Postman se request) ya Vercel ka link hai toh allow karein
+        if (!origin || origin.includes('vercel.app') || origin.includes('localhost')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
 }));
-
 app.use(express.json());
 
 // 2. Routes Import (Yeh sahi hain)

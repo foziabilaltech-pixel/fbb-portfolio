@@ -36,7 +36,7 @@ export default function ContactUs() {
 
   // 2. Phir backend ko call karein
   try {
-    const response = await fetch('https://fbb-portfolio-6tey.vercel.app/api/contact', {
+    const response = await fetch('/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
